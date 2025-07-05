@@ -1,9 +1,7 @@
 """
 renderer.py: Render CLI command tree as ASCII
 """
-from typing import List, Dict
-
-def render_ascii_tree(commands: List[Dict]) -> str:
+def render_ascii_tree(commands: list[dict[str, str]]) -> str:
     if not commands:
         return "(no commands found)"
     lines = ["CLI Commands:"]

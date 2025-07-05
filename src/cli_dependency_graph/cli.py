@@ -8,7 +8,7 @@ from .renderer import render_ascii_tree
 app = typer.Typer()
 
 # Global state for demo (replace with better state mgmt in real app)
-cli_state = {"commands": []}
+cli_state: dict[str, list[dict[str, str]]] = {"commands": []}
 
 @app.command()
 def scan(path: str):
@@ -18,7 +18,8 @@ def scan(path: str):
     typer.echo(f"Discovered commands: {[c['name'] for c in commands]}")
 
 @app.command()
-def show():
+def show(path: str):
+    scan(path)
     """Show the CLI command tree as ASCII."""
     if not cli_state["commands"]:
         typer.echo("No commands found. Run 'scan' first.")
